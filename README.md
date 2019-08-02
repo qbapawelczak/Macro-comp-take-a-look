@@ -1,2 +1,2 @@
 # Computational Macroeconomics
-Resources for undergraduate course in computational macroeconomics.
+Resources for an undergraduate course in computational macroeconomics.
