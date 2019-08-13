@@ -3,7 +3,7 @@ Resources for an undergraduate course in computational macroeconomics.
 
 ## Contents
 
-1. *Lecture Notebooks:** Directory with bank and complete Jupyter Notebooks. You [Jupyter](https://jupyter.org/) to view these.
+1. *Lecture Notebooks:** Directory with bank and complete Jupyter Notebooks. You need [Jupyter](https://jupyter.org/) to view these.
 2. *Lecture Slides:* Directory with pdf-format lecture slides
 3. *Econ126_Winter2019_Syllabus.pdf:* Syllabus from when I taught the course in the winter of 2019
 4. *make_blank_notebooks.py:* Script for creating blank Jupyter Notebooks from completed ones. Removes results and code that has not been marked to be left. Retains Markdown cells and comments.
