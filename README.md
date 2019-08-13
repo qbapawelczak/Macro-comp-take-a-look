@@ -3,7 +3,12 @@ Resources for an undergraduate course in computational macroeconomics.
 
 ## Contents
 
-1. Lecture Notebooks: Directory conta
+1. *Lecture Notebooks:** Directory with bank and complete Jupyter Notebooks. You [Jupyter](https://jupyter.org/) to view these.
+2. *Lecture Slides:* Directory with pdf-format lecture slides
+3. 
+
+## Lecture Notebooks Rendered with [nbviewer](https://nbviewer.jupyter.org/):
+You can view, but not edit or run, the class Notebooks by following the links below:
 
 * Class 01: [Blank](https://nbviewer.jupyter.org/github/letsgoexploring/computational-macroeconomics/blob/master/Lecture%20Notebooks/Econ126_Class_01_blank.ipynb) and [Complete](https://nbviewer.jupyter.org/github/letsgoexploring/computational-macroeconomics/blob/master/Lecture%20Notebooks/Econ126_Class_01.ipynb)
 * Class 02: [Blank](https://nbviewer.jupyter.org/github/letsgoexploring/computational-macroeconomics/blob/master/Lecture%20Notebooks/Econ126_Class_02_blank.ipynb) and [Complete](https://nbviewer.jupyter.org/github/letsgoexploring/computational-macroeconomics/blob/master/Lecture%20Notebooks/Econ126_Class_02.ipynb)
