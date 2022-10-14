@@ -336,11 +336,15 @@ def get_data_frame(df,indicators,show_not_available=False):
     
     '''Produce a DataFrame with the desired indicators'''
     
+    # Initialize DataFrame
     data = pd.DataFrame()
+    
+    # Columns
     new_columns = pd.Series(
         ['money growth','inflation','gdp growth','exchange rate depreciation','nominal interest rate'],
         index=['broad money','gdp deflator','real gdp','exchange rate','lending rate']
     )
+    
     
     for n, value in enumerate(df.groupby(level=0)):
         country, country_df = value
@@ -353,7 +357,7 @@ def get_data_frame(df,indicators,show_not_available=False):
             if stop-start>=10:
                 data.loc[n,'country'] = country
                 try:
-                    data.loc[n,'iso code'] = countries[countries==country].index[n]
+                    data.loc[n,'iso code'] = countries[countries['country name']==country].index[0]
                 except:
                     print('Cannot find iso code for '+country)
                 data.loc[n,'observations'] = stop - start
