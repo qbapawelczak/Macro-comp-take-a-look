@@ -556,6 +556,20 @@ data = pd.DataFrame({
 # In[13]:
 
 
+# First 5 rows of data
+data.tail()
+
+
+# In[14]:
+
+
+# Last 5 rows of data
+data.tail()
+
+
+# In[15]:
+
+
 # RBC data
 columns_ordered =[]
 names = ['gdp','consumption','investment','hours','capital','tfp']
@@ -563,7 +577,7 @@ for name in names:
     columns_ordered.append(name)
     columns_ordered.append(name+'_trend')
     
-data[columns_ordered].dropna().to_csv(export_path+'cross_country_production.csv',index=True)
+data[columns_ordered].dropna().to_csv(export_path+'rbc_data_actual_trend.csv',index=True)
 
 # Create a DataFrame with actual, trend, and cycle data
 columns_ordered =[]
@@ -573,10 +587,10 @@ for name in names:
     columns_ordered.append(name+'_trend')
     columns_ordered.append(name+'_cycle')
     
-data[columns_ordered].dropna().to_csv(export_path+'cross_country_production.csv',index=True)
+data[columns_ordered].dropna().to_csv(export_path+'rbc_data_actual_trend_cycle.csv',index=True)
 
 
-# In[14]:
+# In[16]:
 
 
 # More comprehensive Business Cycle Data
@@ -586,7 +600,7 @@ for name in names:
     columns_ordered.append(name)
     columns_ordered.append(name+'_trend')
 
-data[columns_ordered].dropna().to_csv(export_path+'cross_country_production.csv',index=True)
+data[columns_ordered].dropna().to_csv(export_path+'business_cycle_data_actual_trend.csv',index=True)
 
 # Create a DataFrame with actual, trend, and cycle data
 columns_ordered =[]
@@ -596,5 +610,5 @@ for name in names:
     columns_ordered.append(name+'_trend')
     columns_ordered.append(name+'_cycle')
     
-data[columns_ordered].dropna().to_csv(export_path+'cross_country_production.csv')
+data[columns_ordered].dropna().to_csv(export_path+'business_cycle_data_actual_trend_cycle.csv')
 
