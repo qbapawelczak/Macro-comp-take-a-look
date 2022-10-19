@@ -23,7 +23,7 @@ import fredpy as fp
 import matplotlib.pyplot as plt
 
 plt.style.use('classic')
-# get_ipython().run_line_magic('matplotlib', 'inline')
+get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # In[2]:
@@ -563,7 +563,7 @@ for name in names:
     columns_ordered.append(name)
     columns_ordered.append(name+'_trend')
     
-data[columns_ordered].to_csv(export_path+'cross_country_production.csv',index=True)
+data[columns_ordered].dropna().to_csv(export_path+'cross_country_production.csv',index=True)
 
 # Create a DataFrame with actual, trend, and cycle data
 columns_ordered =[]
@@ -573,7 +573,7 @@ for name in names:
     columns_ordered.append(name+'_trend')
     columns_ordered.append(name+'_cycle')
     
-data[columns_ordered].to_csv(export_path+'cross_country_production.csv',index=True)
+data[columns_ordered].dropna().to_csv(export_path+'cross_country_production.csv',index=True)
 
 
 # In[14]:
@@ -586,7 +586,7 @@ for name in names:
     columns_ordered.append(name)
     columns_ordered.append(name+'_trend')
 
-data[columns_ordered].to_csv(export_path+'cross_country_production.csv',index=True)
+data[columns_ordered].dropna().to_csv(export_path+'cross_country_production.csv',index=True)
 
 # Create a DataFrame with actual, trend, and cycle data
 columns_ordered =[]
@@ -596,5 +596,5 @@ for name in names:
     columns_ordered.append(name+'_trend')
     columns_ordered.append(name+'_cycle')
     
-data[columns_ordered].to_csv(export_path+'cross_country_production.csv')
+data[columns_ordered].dropna().to_csv(export_path+'cross_country_production.csv')
 
