@@ -11,6 +11,8 @@
 # `rbc_data_actual_trend_cycle.csv`            | RBC data with actual, trend, and cycle values        |
 # `business_cycle_data_actual_trend.csv`       | Larger data set with actual and trend values         |
 # `business_cycle_data_actual_trend_cycle.csv` | Larger data set with actual, trend, and cycle values |
+# `business_cycle_metadata.csv`                | Base years for GDP deflator, and hours indexes  |
+# 
 # 
 # The first two files are useful for studying basic RBC models. The second two contain all of the RBC data plus money, inflation, and inflation data.
 
@@ -106,7 +108,10 @@ imports = deflate(imports,deflator)
 m2 = deflate(m2,deflator)
 
 # Base year for GDP deflator
-base_year = deflator.units.split(' ')[1].split('=')[0]
+deflator_base_year = deflator.units.split(' ')[1][:4]
+
+# Base year for hours
+hours_base_year = hours.units.split(' ')[1][:4]
 
 # pce inflation as percent change over past year
 pce_deflator = pce_deflator.apc()
@@ -289,7 +294,7 @@ m2 = m2.per_capita(civ_pop=True).times(1000)
 
 
 # Scale hours per person to equal 100 on October (Quarter III) of GDP deflator base year.
-hours.data = hours.data/hours.data.loc[base_year+'-10-01']*100
+hours.data = hours.data/hours.data.loc[deflator_base_year+'-10-01']*100
 
 
 # ## Plot aggregate data
@@ -301,34 +306,34 @@ fig, axes = plt.subplots(3,4,figsize=(6*4,4*3))
 
 axes[0][0].plot(gdp.data)
 axes[0][0].set_title('GDP')
-axes[0][0].set_ylabel('Thousands of '+base_year+' $')
+axes[0][0].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][1].plot(consumption.data)
 axes[0][1].set_title('Consumption')
-axes[0][1].set_ylabel('Thousands of '+base_year+' $')
+axes[0][1].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][2].plot(investment.data)
 axes[0][2].set_title('Investment')
-axes[0][2].set_ylabel('Thousands of '+base_year+' $')
+axes[0][2].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][3].plot(government.data)
 axes[0][3].set_title('Gov expenditure')
-axes[0][3].set_ylabel('Thousands of '+base_year+' $')
+axes[0][3].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[1][0].plot(capital.data)
 axes[1][0].set_title('Capital')
-axes[1][0].set_ylabel('Thousands of '+base_year+' $')
+axes[1][0].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[1][1].plot(hours.data)
 axes[1][1].set_title('Hours')
-axes[1][1].set_ylabel('Index ()'+base_year+'=100)')
+axes[1][1].set_ylabel('Index ()'+hours_base_year+'=100)')
 
 axes[1][2].plot(tfp.data)
 axes[1][2].set_title('TFP')
 
 axes[1][3].plot(m2.data)
 axes[1][3].set_title('M2')
-axes[1][3].set_ylabel('Thousands of '+base_year+' $')
+axes[1][3].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[2][0].plot(tbill_3mo.data*100)
 axes[2][0].set_title('3mo T-Bill')
@@ -381,32 +386,32 @@ fig, axes = plt.subplots(3,4,figsize=(6*4,4*3))
 axes[0][0].plot(gdp.data)
 axes[0][0].plot(np.exp(gdp_log_trend.data),c='r')
 axes[0][0].set_title('GDP')
-axes[0][0].set_ylabel('Thousands of '+base_year+' $')
+axes[0][0].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][1].plot(consumption.data)
 axes[0][1].plot(np.exp(consumption_log_trend.data),c='r')
 axes[0][1].set_title('Consumption')
-axes[0][1].set_ylabel('Thousands of '+base_year+' $')
+axes[0][1].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][2].plot(investment.data)
 axes[0][2].plot(np.exp(investment_log_trend.data),c='r')
 axes[0][2].set_title('Investment')
-axes[0][2].set_ylabel('Thousands of '+base_year+' $')
+axes[0][2].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][3].plot(government.data)
 axes[0][3].plot(np.exp(government_log_trend.data),c='r')
 axes[0][3].set_title('Gov expenditure')
-axes[0][3].set_ylabel('Thousands of '+base_year+' $')
+axes[0][3].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[1][0].plot(capital.data)
 axes[1][0].plot(np.exp(capital_log_trend.data),c='r')
 axes[1][0].set_title('Capital')
-axes[1][0].set_ylabel('Thousands of '+base_year+' $')
+axes[1][0].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[1][1].plot(hours.data)
 axes[1][1].plot(np.exp(hours_log_trend.data),c='r')
 axes[1][1].set_title('Hours')
-axes[1][1].set_ylabel('Index ()'+base_year+'=100)')
+axes[1][1].set_ylabel('Index ()'+hours_base_year+'=100)')
 
 axes[1][2].plot(tfp.data)
 axes[1][2].plot(np.exp(tfp_log_trend.data),c='r')
@@ -415,7 +420,7 @@ axes[1][2].set_title('TFP')
 axes[1][3].plot(m2.data)
 axes[1][3].plot(np.exp(m2_log_trend.data),c='r')
 axes[1][3].set_title('M2')
-axes[1][3].set_ylabel('Thousands of '+base_year+' $')
+axes[1][3].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[2][0].plot(tbill_3mo.data*100)
 axes[2][0].plot(tbill_3mo_trend.data*100,c='r')
@@ -455,34 +460,34 @@ fig, axes = plt.subplots(3,4,figsize=(6*4,4*3))
 
 axes[0][0].plot(gdp_log_cycle.data)
 axes[0][0].set_title('GDP')
-axes[0][0].set_ylabel('Thousands of '+base_year+' $')
+axes[0][0].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][1].plot(consumption_log_cycle.data)
 axes[0][1].set_title('Consumption')
-axes[0][1].set_ylabel('Thousands of '+base_year+' $')
+axes[0][1].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][2].plot(investment_log_cycle.data)
 axes[0][2].set_title('Investment')
-axes[0][2].set_ylabel('Thousands of '+base_year+' $')
+axes[0][2].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[0][3].plot(government_log_cycle.data)
 axes[0][3].set_title('Gov expenditure')
-axes[0][3].set_ylabel('Thousands of '+base_year+' $')
+axes[0][3].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[1][0].plot(capital_log_cycle.data)
 axes[1][0].set_title('Capital')
-axes[1][0].set_ylabel('Thousands of '+base_year+' $')
+axes[1][0].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[1][1].plot(hours_log_cycle.data)
 axes[1][1].set_title('Hours')
-axes[1][1].set_ylabel('Index ()'+base_year+'=100)')
+axes[1][1].set_ylabel('Index ()'+hours_base_year+'=100)')
 
 axes[1][2].plot(tfp_log_cycle.data)
 axes[1][2].set_title('TFP')
 
 axes[1][3].plot(m2_log_cycle.data)
 axes[1][3].set_title('M2')
-axes[1][3].set_ylabel('Thousands of '+base_year+' $')
+axes[1][3].set_ylabel('Thousands of '+deflator_base_year+' $')
 
 axes[2][0].plot(tbill_3mo_cycle.data)
 axes[2][0].set_title('3mo T-Bill')
@@ -557,7 +562,7 @@ data = pd.DataFrame({
 
 
 # First 5 rows of data
-data.tail()
+data.head()
 
 
 # In[14]:
@@ -611,4 +616,16 @@ for name in names:
     columns_ordered.append(name+'_cycle')
     
 data[columns_ordered].dropna().to_csv(export_path+'business_cycle_data_actual_trend_cycle.csv')
+
+
+# In[17]:
+
+
+# Export metadata to csv
+metadata = pd.Series({
+    'deflator_base_year':deflator_base_year,
+    'hours_base_year':hours_base_year
+})
+
+metadata.to_csv(export_path+'business_cycle_metadata.csv')
 

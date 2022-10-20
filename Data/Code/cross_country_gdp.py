@@ -1,16 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# In[1]:
+
+
 import numpy as np
 import pandas as pd
 
 
-# 0. Export path: Set to empty string '' if you want to export data to current directory
+# 0. Preliminaries
+
+# Set the current value of the PWT data file
+current_pwt_file = 'pwt100.xlsx'
+
+# Export path: Set to empty string '' if you want to export data to current directory
 export_path = '../Csv/'
 
 
 # 1. Import data
-pwt = pd.read_excel('https://www.rug.nl/ggdc/docs/pwt91.xlsx',sheet_name='Data')
+pwt = pd.read_excel('https://www.rug.nl/ggdc/docs/'+current_pwt_file,sheet_name='Data')
 
 
 # 2. Manage data
